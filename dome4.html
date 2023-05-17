@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title># 截屏提取存储</title>
+	</head>
+	<link type="text/css" rel="stylesheet" href="css/tou.css">
+	<body>
+		<div id="login"><a href="table.html">Login</a></div>
+		<header>
+			<div id="container">
+				<nav>
+					<a href="index.html">首页</a>
+					<a href="fengxiandiqu.html">疫情地区分布</a>
+					<a href="into.html">疫情数据</a>
+					<a href="世界地图2.html">世界疫情</a>
+					<a href="data.html">新闻</a>
+					<a href="info.html">数据源码</a>
+				</nav>
+			</div>
+
+
+		</header>
+		<div>
+			<pre style="width: 800px;margin-left: 10%;margin-right: 10%;margin-top: 30px;">
+				# -*- coding;utf-8 -*-
+				"""
+				File name : main.PY
+				Program IDE : PyCharm
+				Create file time: 2022/11/15 14:08
+				File Create By Author : 小梦
+				"""
+				import tkinter as tk
+				import keyboard  # 用于监控键盘按下，触发事件（pip install keyboard）
+				import time
+				from aip import AipOcr  # 调用百度接口（pip install baidu-aip）
+				from PIL import ImageGrab  # 用于保存屏幕截图
+				
+				import pymysql
+				#使用mysql-connector连接数据库
+				mydb = pymysql.connect(
+				    host="localhost",       # 数据库主机地址
+				    user="root",    # 数据库用户名
+				    passwd="root",  # 数据库密码
+				    db="xiaomeng"
+				)
+				print(mydb)
+				mycursor = mydb.cursor()#获取操作游标
+				
+				def get_file_content(filePath):
+				    with open(filePath, "rb") as fp:
+				        return fp.read()
+				def OCR():
+				    while (1):
+				        now = time.localtime()
+				        year, month, day, hour, minute, second = now.tm_year, now.tm_mon, now.tm_mday, \
+				                                                 now.tm_hour, now.tm_min, now.tm_sec
+				        name = str(year) + str(month) + str(day) + str(hour) + str(minute) + str(second)
+				        keyboard.wait(hotkey="alt+z")
+				        keyboard.wait(hotkey="enter")
+				        time.sleep(0.1)
+				        # 2、保存截图
+				        image = ImageGrab.grabclipboard()
+				        image.save(f"{name}.png")
+				
+				        """ 你的 APPID AK SK """
+				        APP_ID = '28433613'
+				        API_KEY = 'QnmGhGWfc4DPai7B7wcbeYK1'
+				        SECRET_KEY = 'vnpKxhvekkWHtnU5DGcyBw91z94NEiMs'
+				
+				        client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
+				        """ 读取文件 """
+				        image = get_file_content(f"{name}.png")
+				        res_image = client.basicAccurate(image)
+				        list = []
+				        for i in res_image['words_result']:
+				            print(i['words'])
+				            list.append(i['words'])
+				        print(list)
+				        print(list[0],list[1],list[3],list[5])
+				        mycursor.execute(f"insert into orc values ('{list[0]}','{list[1]}','{list[3]}','{list[5]}');")
+				
+				
+				
+				win =  tk.Tk()
+				win.geometry("100x50")
+				buttom = tk.Button(text="截图识别",command=OCR).pack()
+				win.mainloop()
+</pre>
+
+		</div>
+	</body>
+	<footer>
+		<div style="position:fixed; bottom:0px; left:0px;background-color: antiquewhite;width: 100%; text-align:center;">Copyright &copy; 2022     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <a href="https://github.com/mengfan123"> github.com</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   	<a href="https://gitee.com/xiao-fan-little-dream/dashboard/codes">gitee.com/xiao-fan-little-dream</a>           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     <a href="https://blog.csdn.net/Withadream?spm=1000.2115.3001.5343">xiaoxiaoxiao</a>  <a href="https://opendata.baidu.com/data/inner?resource_id=5653&query=%E5%9B%BD%E5%A4%96%E6%96%B0%E5%9E%8B%E8%82%BA%E7%82%8E%E6%9C%80%E6%96%B0%E5%8A%A8%E6%80%81&dsp=iphone&tn=wisexmlnew&alr=1&is_opendata=1&cb=jsonp_1664547128161_41506">数据来源</a> </div>
+	</footer>
+</html>

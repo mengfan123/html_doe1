@@ -1,0 +1,74 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实例2-5 表格和表单的应用</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post">
+  <table width="50%" border="1" bgcolor="#CCCCCC" align="center" >
+    <tr>
+      <td align="center" colspan="2">用户注册</td>
+    </tr>
+    <tr>
+      <td width="24%">用户名</td>
+      <td width="76%"><input type="text" name="user1" id="user1"></td>
+    </tr>
+    <tr>
+      <td>密码</td>
+      <td><input type="password" name="psw1" id="psw1"></td>
+    </tr>
+    <tr>
+      <td>重复密码</td>
+      <td><input type="password" name="psw2" id="psw2"></td>
+    </tr>
+    <tr>
+      <td>性别</td>
+      <td>
+        <label>
+          <input name="R1" type="radio" id="R1_0" value="male" checked>
+          男
+        </label>
+        <label>
+          <input type="radio" name="R1" value="female" id="R1_1">
+          女</label>
+        <br>
+      <label for="radio"> </label></td>
+    </tr>
+    <tr>
+      <td>爱好</td>
+      <td>
+        <label>
+          <input type="checkbox" name="C1" value="travel" id="C1_0">
+          旅游</label>
+        <label>
+          <input type="checkbox" name="C1" value="book" id="C1_1">
+          阅读</label>
+        <label>
+          <input type="checkbox" name="C1" value="sports" id="C1_2">
+          运动</label>
+</td>
+    </tr>
+    <tr>
+      <td>学历</td>
+      <td><select name="s1" id="s1">
+        <option selected>中专</option>
+        <option>高中</option>
+        <option>大专</option>
+        <option>本科</option>
+        <option>研究生</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td>自我介绍</td>
+      <td><textarea name="textarea" rows="3" id="textarea"></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

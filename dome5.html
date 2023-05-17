@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>#OCR图片文字提取</title>
+	</head>
+	<link type="text/css" rel="stylesheet" href="css/tou.css">
+	<body>
+		<div id="login"><a href="table.html">Login</a></div>
+		<header>
+			<div id="container">
+				<nav>
+					<a href="index.html">首页</a>
+					<a href="fengxiandiqu.html">疫情地区分布</a>
+					<a href="into.html">疫情数据</a>
+					<a href="世界地图2.html">世界疫情</a>
+					<a href="data.html">新闻</a>
+					<a href="info.html">数据源码</a>
+				</nav>
+			</div>
+
+
+		</header>
+		<div>
+			<pre style="width: 800px;margin-left: 10%;margin-right: 10%;margin-top: 30px;">
+				# -*- coding;utf-8 -*-
+				"""
+				File name : OCR.PY
+				Program IDE : PyCharm
+				Create file time: 2022/11/15 13:56
+				File Create By Author : 小梦
+				"""
+				
+				from aip import AipOcr
+				
+				
+				
+				
+				""" 你的 APPID AK SK """
+				APP_ID = '28433613'
+				API_KEY = '您的ID'
+				SECRET_KEY = '您的密钥'
+				
+				client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
+				""" 读取文件 """
+				def get_file_content(filePath):
+				    with open(filePath, "rb") as fp:
+				        return fp.read()
+				
+				
+				image = get_file_content('screen.png')
+				# url = "https://www.x.com/sample.jpg"
+				# pdf_file = get_file_content('文件路径')
+				
+				# 调用通用文字识别（高精度版）
+				res_image = client.basicAccurate(image)
+				# res_url = client.basicAccurateUrl(url)
+				# res_pdf = client.basicAccuratePdf(pdf_file)
+				print(res_image)
+				# print(res_url)
+				# print(res_pdf)
+				
+				# # 如果有可选参数
+				# options = {}
+				# options["detect_direction"] = "true"
+				# options["probability"] = "true"
+				# res_image = client.basicAccurate(image, options)
+				# # res_url = client.basicAccurateUrl(url, options)
+				# # res_pdf = client.basicAccuratePdf(pdf_file, options)
+				# print(res_image)
+				# print(res_url)
+				# print(res_pdf)
+			</pre>
+
+		</div>
+	</body>
+	<footer>
+		<div style="position:fixed; bottom:0px; left:0px;background-color: antiquewhite;width: 100%; text-align:center;">Copyright &copy; 2022     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <a href="https://github.com/mengfan123"> github.com</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   	<a href="https://gitee.com/xiao-fan-little-dream/dashboard/codes">gitee.com/xiao-fan-little-dream</a>           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     <a href="https://blog.csdn.net/Withadream?spm=1000.2115.3001.5343">xiaoxiaoxiao</a>  <a href="https://opendata.baidu.com/data/inner?resource_id=5653&query=%E5%9B%BD%E5%A4%96%E6%96%B0%E5%9E%8B%E8%82%BA%E7%82%8E%E6%9C%80%E6%96%B0%E5%8A%A8%E6%80%81&dsp=iphone&tn=wisexmlnew&alr=1&is_opendata=1&cb=jsonp_1664547128161_41506">数据来源</a> </div>
+	</footer>
+</html>

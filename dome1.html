@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title># 主要疫情状态</title>
+	</head>
+	<link type="text/css" rel="stylesheet" href="css/tou.css">
+	<body>
+		<div id="login"><a href="table.html">Login</a></div>
+		<header>
+			<div id="container">
+				<nav>
+					<a href="index.html">首页</a>
+					<a href="fengxiandiqu.html">疫情地区分布</a>
+					<a href="into.html">疫情数据</a>
+					<a href="世界地图2.html">世界疫情</a>
+					<a href="data.html">新闻</a>
+					<a href="info.html">数据源码</a>
+				</nav>
+			</div>
+
+
+		</header>
+		<div>
+			<pre style="width: 800px;margin-left: 10%;margin-right: 10%;margin-top: 30px;"># 主要疫情状态
+import requests
+import json
+import csv
+#
+# f = open('test.csv','w',encoding="utf-8",newline='')
+# head = ['新增本土','新增本土无症状','新增境外','港澳台新增','现有本土','现有本土无症状','现有境外','现有确诊','累计确诊','累计境外','累计治愈','累计死亡']
+# csv_writer = csv.writer(f)
+# csv_writer.writerow(head)
+#
+# header = {
+#     "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36",
+# }
+# # url = 'https://voice.baidu.com/api/newpneumonia?from=page&callback=jsonp_1664547128153_33778'
+# url = 'https://opendata.baidu.com/data/inner?resource_id=5653&query=%E5%9B%BD%E5%A4%96%E6%96%B0%E5%9E%8B%E8%82%BA%E7%82%8E%E6%9C%80%E6%96%B0%E5%8A%A8%E6%80%81
+&dsp=iphone&tn=wisexmlnew&alr=1&is_opendata=1&cb=jsonp_1664547128161_41506'
+# response = requests.get(url,headers=header).text
+# data = response.split('jsonp_1664547128161_41506(')
+# data1 =data[1].strip(')')
+# tr = json.loads(data1)
+# list = tr['Result'][0]['DisplayData']['resultData']['tplData']['data_list']
+# l = []
+# # print(list[0]['total_desc'])
+# for i in list:
+#     add = i['total_num']
+#     l.append(add)
+# print(l)
+#
+# for i in list:
+#     add = i['total_desc']
+#     l.append(add)
+# print(l)
+#     csv_writer.writerow(t)
+# f.close()
+
+
+#
+#
+# #疫情详细状态 省
+#
+import requests
+import json
+
+
+import csv
+
+f = open('疫情详细信息省2.csv','a',encoding="utf-8",newline='')
+head = ['更新时间','城市','新增确诊','新增无症状','累计确诊','风险地区']
+csv_writer = csv.writer(f)
+csv_writer.writerow(head)
+
+header = {
+    "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36",
+}
+
+url = 'https://voice.baidu.com/api/newpneumonia?from=page&callback=jsonp_1664634892549_31708'
+response = requests.get(url,headers=header).text
+data = response.split('jsonp_1664634892549_31708(')
+data1 = data[1].strip(');')
+# f = open('2.txt','w',encoding="utf-8")
+# f.write(data1)
+tr = json.loads(data1)
+list_data = tr["data"]["caseList"]
+for i in list_data:
+    area = i['area']
+    relativeTime = i['relativeTime']
+    confirmedRelative = i['confirmedRelative']
+    asymptomaticRelative = i['asymptomaticRelative']
+    confirmed = i['confirmed']
+    dangerousAreas = i['dangerousAreas']['totalNum']
+    print("<div>",area,confirmedRelative,asymptomaticRelative,confirmed,dangerousAreas,"</div>")
+#     t = [
+#         (relativeTime,area, confirmedRelative, asymptomaticRelative, confirmed, dangerousAreas)
+#     ]
+#     # yu =
+#     csv_writer.writerows(t)
+# f.close()</pre>
+
+		</div>
+	</body>
+	<footer>
+		<div style="position:fixed; bottom:0px; left:0px;background-color: antiquewhite;width: 100%; text-align:center;">Copyright &copy; 2022     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <a href="https://github.com/mengfan123"> github.com</a>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   	<a href="https://gitee.com/xiao-fan-little-dream/dashboard/codes">gitee.com/xiao-fan-little-dream</a>           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     <a href="https://blog.csdn.net/Withadream?spm=1000.2115.3001.5343">xiaoxiaoxiao</a>  <a href="https://opendata.baidu.com/data/inner?resource_id=5653&query=%E5%9B%BD%E5%A4%96%E6%96%B0%E5%9E%8B%E8%82%BA%E7%82%8E%E6%9C%80%E6%96%B0%E5%8A%A8%E6%80%81&dsp=iphone&tn=wisexmlnew&alr=1&is_opendata=1&cb=jsonp_1664547128161_41506">数据来源</a> </div>
+	</footer>
+</html>
