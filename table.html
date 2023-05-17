@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+		function change(){
+		var str="";
+		for(var i=1;i<=4;i++)
+		   str+=Math.floor(Math.random()*10);
+		  document.form1.pswtext2.value=str;
+		}
+		function checkEmailName(){  
+		var strEmail= document.form1.email.value;
+		var at=strEmail.indexOf("@");
+		var dot=strEmail.indexOf(".");
+		if(strEmail.length!=0)
+		{
+		if (at==-1||dot==-1)
+		{
+		alert("邮箱名必须包含@和.符号");
+		return false;
+		}
+		   if (at==0||dot==0||dot==strEmail.length-1)
+		{
+		alert("字符@或字符.不能出现在第一位，字符.不能出现在最后一位");
+		return false;
+		}
+		if (at>dot) 
+		{
+		alert("字符@必须出现在字符.的前面");
+		return false;
+		}
+		if (dot-at==1)
+		{
+		alert("字符@和字符.之间应该包含内容");
+		return false;
+		}
+		if (at!==strEmail.lastIndexOf('@'))
+		{
+		alert("字符@只能出现一次");
+		return false;
+		}
+		if (at!=-1&&strEmail.substring(at+1).toLowerCase()=="qq.com")
+		{
+		alert("本网站暂时不支持qq邮箱");
+		return false;
+		}
+		}
+		else
+		{
+		alert("请输入邮箱名");
+		return false;
+		} 
+		return true;
+		}
+		function passCheck(){
+		var userpass = document.form1.psw.value;
+		if(userpass == "")
+		{
+		alert("请输入密码");
+		return false;
+		}
+		if(userpass.length < 6)
+		{
+		alert("密码必须多于或等于 6 个字符");
+		return false;
+		}
+		return true;
+		}
+		function checkPsw(){
+		var randompass = document.form1.pswtext.value;
+		var randompass2 = document.form1.pswtext2.value;
+		if(randompass == "")
+		{
+		alert("请输入验证码");
+		return false;
+		}
+		if(randompass.length>4)
+		{
+		alert("验证码不得多于4位数字");
+		return false;
+		}
+		if(randompass!=randompass2)
+		{
+		alert("验证码不正确，请重新输入");
+		return false;
+		}
+		return true;
+		}
+	
+		</script>
+		
+	</head>
+	<body>
+		<div class="content">
+		      <div class="sideLeft">
+		      <div class="leftTop">
+		          <form id="form1" name="form1" method="post" action="success.html" onsubmit="return validateform()">
+		  <table border="0" align="center">
+		    <tr>
+		      <td colspan="3" align="center">用户登录</td>
+		    </tr>
+		    <tr>
+		      <td width="59">邮箱名</td>
+		      <td colspan="2"><input type="text" name="email" id="email"></td>
+		    </tr>
+		    <tr>
+		      <td>密 码</td>
+		      <td colspan="2"><input type="password" name="psw" id="psw"></td>
+		    </tr>
+		    <tr>
+		      <td>验证码</td>
+		      <td colspan="2"><input name="pswtext" type="text" id="pswtext"></td>
+		    </tr>
+		    <tr>
+		      <td>&nbsp;</td>
+		      <td colspan="2"><input type="button" name="button" id="button" value="生成4位验证码" onClick="change()">
+		        <input name="pswtext2" type="text" id="pswtext2" size="6" maxlength="4"></td>
+		    </tr>
+		    <tr>
+		      <td colspan="3" align="center"><input type="submit" name="submit1" id="submit1" value="登录">
+		        <input type="reset" name="reset1" id="reset1" value="清除"></td>
+		    </tr>
+		    <tr>
+		      <td align="right">&nbsp;</td>
+		      <td width="120" align="right"><a href="zhuce.html" target="_blank">快速注册</a></td>
+		      <td width="69" align="left"><a href="zhuce.html">完整注册</a></td>
+		    </tr>
+		  </table>
+		</form>
+		         </div>
+	</body>
+</html>
